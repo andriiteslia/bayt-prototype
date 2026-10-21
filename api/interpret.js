@@ -133,7 +133,12 @@ export default async function handler(req, res) {
         messages: [{ role: 'user', content: userMessage(text, current) }],
       }),
     });
-    if (!r.ok) return res.status(200).json({ ok: false, error: 'upstream_' + r.status });
+    if (!r.ok) {
+      // Upstream error type/message only (never the key), to diagnose from the browser
+      let detail = '';
+      try { const e = await r.json(); detail = `${e.error?.type || ''}: ${e.error?.message || ''}`.slice(0, 300); } catch {}
+      return res.status(200).json({ ok: false, error: 'upstream_' + r.status, detail });
+    }
     const data = await r.json();
     const call = (data.content || []).find((b) => b.type === 'tool_use');
     if (!call) return res.status(200).json({ ok: false, error: 'no_tool_call' });
