@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import HomeArt from './HomeArt.jsx';
+import { Photo, Gallery } from './Photo.jsx';
 import { Icon, StatusIcon, Sheet } from './ui.jsx';
 import { fmtAED } from '../lib/interpret.js';
 
@@ -30,8 +30,8 @@ export function ListingCard({ s, saved, onSave, onOpen, onNotForMe, showIntro })
   return (
     <article className="card">
       <div className="card-art" onClick={onOpen}>
-        <HomeArt listing={l} height={210} />
-        <span className="art-tag">Illustration</span>
+        <Photo listing={l} height={210} />
+        <span className="art-tag">Sample photo</span>
         {l.verified && <span className="verified"><Icon.shield /> Checked listing</span>}
       </div>
       <button className={`save ${saved ? 'on' : ''}`} onClick={onSave} aria-pressed={saved} aria-label={saved ? 'Remove from saved' : 'Save'}>
@@ -85,10 +85,10 @@ export function Detail({ s, criteria, saved, onSave, onBack, onMessage, newcomer
   return (
     <div className="detail">
       <div className="detail-top">
-        <HomeArt listing={l} height={240} rounded={false} />
+        <Gallery listing={l} height={280} />
         <button className="icon-btn float left" onClick={onBack} aria-label="Back to results"><Icon.back /></button>
         <button className={`icon-btn float right save-d ${saved ? 'on' : ''}`} onClick={onSave} aria-label={saved ? 'Remove from saved' : 'Save'}><Icon.heart filled={saved} /></button>
-        <span className="art-tag">Illustration</span>
+        <span className="art-tag">Sample photos</span>
       </div>
       <div className="detail-body">
         <div className="price lg"><strong>{fmtAED(l.rent)}</strong><span>/year · about {fmtAED(l.rent / 12)} a month</span></div>

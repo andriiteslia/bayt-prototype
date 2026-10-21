@@ -6,7 +6,7 @@ import { AREAS } from './data/areas.js';
 import { Icon } from './components/ui.jsx';
 import { UnderstandingCard, LegendSheet, EditSheet, Questions } from './components/Understanding.jsx';
 import { ListingCard, Detail, MessageSheet, NotForMeSheet } from './components/Listing.jsx';
-import HomeArt from './components/HomeArt.jsx';
+import { Photo } from './components/Photo.jsx';
 import { NotesPanel } from './components/Notes.jsx';
 import { readWithAI } from './lib/ai.js';
 import Device from './components/Device.jsx';
@@ -282,7 +282,7 @@ export default function App() {
               const s = scoreListing(u?.criteria || [], LISTINGS.find((l) => l.id === id));
               return (
                 <button key={id} className="mini" onClick={() => setDetailId(id)}>
-                  <div className="mini-art"><HomeArt listing={s.listing} height={72} /></div>
+                  <div className="mini-art"><Photo listing={s.listing} height={72} /></div>
                   <div>
                     <strong>{fmtAED(s.listing.rent)}</strong>
                     <span>{s.listing.beds}-bed · {s.listing.building}</span>
@@ -446,7 +446,7 @@ function ZeroState({ u, hidden, res, onRelax, onOpen }) {
       <h4>Closest I have</h4>
       {closest.map((s) => (
         <button key={s.listing.id} className="mini" onClick={() => onOpen(s.listing.id)}>
-          <div className="mini-art"><HomeArt listing={s.listing} height={72} /></div>
+          <div className="mini-art"><Photo listing={s.listing} height={72} /></div>
           <div>
             <strong>{fmtAED(s.listing.rent)}</strong>
             <span>{s.listing.beds}-bed · {s.area.name.replace(/ \(.*\)/, '')}</span>

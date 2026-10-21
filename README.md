@@ -2,7 +2,7 @@
 
 A clickable, mobile-first prototype for a property marketplace. A renter describes their next home in their own words, the app shows **what it understood and how sure it is**, the renter corrects it in a tap, and the app returns a **short, explained shortlist**.
 
-> Fictional data only: no real listings, agents or Property Finder content. Typed requests are read by a live model (Claude Haiku) through a serverless function. The API key stays on the server.
+> Fictional data only: no real listings, agents or Property Finder content. Photos are sample interiors, labelled "Sample photo", and don't show the fictional homes. Typed requests are read by a live model (Claude Haiku) through a serverless function. The API key stays on the server.
 
 **Live prototype:** `https://<project>.vercel.app` On a laptop, the design notes sit next to the phone. On a phone, tap **Design notes**.
 
