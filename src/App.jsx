@@ -93,7 +93,7 @@ export default function App() {
       setBusy(false);
       if (ai?.understanding) {
         const a = ai.understanding;
-        const changes = a.changes?.length ? a.changes : diffLabels(u.criteria, a.criteria);
+        const changes = diffLabels(u.criteria, a.criteria);
         next = { ...u, criteria: a.criteria, notes: a.notes, newcomer: u.newcomer || a.newcomer, changes, source: u.source === 'example' ? 'example' : 'ai' };
       }
     }
@@ -345,9 +345,17 @@ export default function App() {
   );
 }
 
+// What changed, by field, in the same words the scripted path uses
 function diffLabels(a, b) {
-  const la = a.map((c) => c.label), lb = b.map((c) => c.label);
-  return [...lb.filter((l) => !la.includes(l)).map((l) => `Added "${l}"`), ...la.filter((l) => !lb.includes(l)).map((l) => `Removed "${l}"`)];
+  const out = [];
+  for (const c of b) {
+    const old = a.find((x) => x.field === c.field);
+    if (!old) out.push(`Added "${c.label}"`);
+    else if (old.label !== c.label) out.push(`Updated "${c.label}"`);
+    else if (old.weight !== c.weight) out.push(`"${c.label}" is now ${c.weight === 'must' ? 'a must' : 'nice to have'}`);
+  }
+  for (const c of a) if (!b.some((x) => x.field === c.field)) out.push(`Removed "${c.label}"`);
+  return out;
 }
 
 function Loading({ query }) {
