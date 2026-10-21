@@ -55,6 +55,7 @@ NOTES:
 
 newcomer: true if they are moving to Dubai / new to the city / don't know the areas.
 
+Only add a note when the renter actually raised that topic. Never add a "declined" note unless they asked to filter by who lives nearby, and never add a "cantcheck" note about safety, neighbours or anything else they didn't mention.
 Do not invent criteria the renter didn't express. Fewer, correct items beat many guesses. Write notes and details in plain, friendly English, max 30 words each.`;
 
 const SCHEMA = {

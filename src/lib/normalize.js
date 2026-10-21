@@ -95,6 +95,12 @@ export function normalize(raw, userText) {
       quote: verifyQuote(c.quote, userText),
       detail: typeof c.detail === 'string' ? c.detail.slice(0, 240) : '',
     };
+    // Vibes are always our translation of the renter's word, so they're always assumptions
+    const VIBES = { quiet: 'I read "quiet" as away from nightlife and main roads.', lively: 'I read this as cafés and restaurants within walking distance.', beach: 'I used areas within about 10 minutes of a public beach.', schools: 'I look for at least two well-rated schools within 2 km.' };
+    if (VIBES[field] || (field === 'park' && !/\d/.test(out.quote))) {
+      out.certainty = 'assumed';
+      if (!out.detail) out.detail = VIBES[field] || 'I read this as a park you can walk to in about 10 minutes.';
+    }
     // "You said" must be provable: without the renter's own words it becomes an assumption
     if (out.certainty === 'said' && !out.quote) {
       out.certainty = 'assumed';
