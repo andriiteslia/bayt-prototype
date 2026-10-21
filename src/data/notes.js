@@ -4,7 +4,7 @@
 export const NOTES = {
   intro: {
     title: 'Describe your next home',
-    text: 'A renter describes the home they want in their own words. Before showing anything, the app shows what it understood and how sure it is. Every part of that can be fixed with one tap or a sentence. Then it returns a short list that explains itself, including the bad parts.',
+    text: 'A renter describes the home they want in their own words. Above the results, the app shows what it understood and how sure it is. Every part of that can be fixed with one tap or a sentence. The short list below explains itself, including the bad parts.',
     bet: 'The hard part isn\'t parsing the sentence. It\'s getting someone to trust the result enough to message an agent from another country.',
   },
 
@@ -27,9 +27,14 @@ export const NOTES = {
 
   decisions: [
     {
-      title: 'Show the reading before the results',
-      why: 'A quiet misreading does the most damage to trust. If "quiet" became "Downtown", nothing on the screen would tell her.',
-      cost: 'Results start lower on the screen. They sit right under the reading, not on a separate step.',
+      title: 'The reading sits above the results, always',
+      why: 'A quiet misreading does the most damage to trust. If "quiet" became "Downtown", nothing on the screen would tell her. So the reading is never a separate step and never fully hidden.',
+      cost: 'It costs space above the first home. See the next decision.',
+    },
+    {
+      title: 'Collapsed by default, but the guesses stay visible',
+      why: 'Results come first: the reading starts as one line, with my guesses (dashed) leading and a count like "2 guesses to check". Any chip is still one tap to fix. It opens on its own when it needs attention: a basic reading, a refused filter or an out-of-scope request.',
+      cost: 'Fewer people will open the full reading. That\'s fine if they still see and fix the guesses; the test plan checks exactly that.',
     },
     {
       title: 'Three levels of certainty, always visible',
@@ -70,7 +75,7 @@ export const NOTES = {
 
   scenarios: [
     { title: 'Vague newcomer', text: "I'm moving from London in March for a job in DIFC and don't know the city at all. We have a dog.", look: 'It doesn\'t guess a budget. It asks three skippable questions, then shows one-line area intros on each card.' },
-    { title: 'Clear request, honest trade-offs', text: "Somewhere quiet, 2 bedrooms, under 140k. I don't want to drive more than 25 minutes to DIFC, and a park I can walk my dog to.", look: 'Two assumptions are dashed. Tap "Quiet" to see how it was read. Switch to Filters: half the request has no filter.' },
+    { title: 'Clear request, honest trade-offs', text: "Somewhere quiet, 2 bedrooms, under 140k. I don't want to drive more than 25 minutes to DIFC, and a park I can walk my dog to.", look: 'The reading is one line with two dashed guesses. Tap "Quiet" to see how it was read. Tap Show, then Filters: half the request has no filter.' },
     { title: 'Conflicting / unrealistic', text: '3 bedroom in Downtown under 90k', look: 'No empty screen. It gives the real starting price, which single must-have to relax and how many homes each option unlocks.' },
     { title: 'Unverifiable & discriminatory', text: 'A safe area with nice neighbours, no families with kids, 1 bedroom near the metro under 110k', look: 'It declines the demographic filter and offers an alternative. "Safe" and "neighbours" go under can\'t check.' },
     { title: 'Correct it in words', text: null, look: 'After any search, type "forget the park", "flexible on budget" or "actually 3 bedrooms". Each change comes with Undo.' },

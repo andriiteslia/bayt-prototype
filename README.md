@@ -4,7 +4,7 @@ A clickable, mobile-first prototype for a property marketplace. A renter describ
 
 > Fictional data only: no real listings, agents or Property Finder content. Photos are sample interiors, labelled "Sample photo", and don't show the fictional homes. Typed requests are read by a live model (Claude Haiku) through a serverless function. The API key stays on the server.
 
-**Live prototype:** `https://<project>.vercel.app` On a laptop, the design notes sit next to the phone. On a phone, tap **Design notes**.
+**Live prototype:** https://bayt-prototype.vercel.app. On a laptop, the design notes sit next to the phone. On a phone, tap **Design notes**.
 
 ---
 
@@ -36,6 +36,9 @@ Out of scope (besides the brief's list): maps, viewing booking, chat with agents
 ## 2. AI interaction design — principles
 
 1. **The understanding is the product.** After every request the user sees a structured read-back, not a chat bubble. Each item is a chip they can tap.
+   - It sits above the results and starts **collapsed to one line**, with the guesses first and a count ("2 guesses to check"), so homes are visible straight away.
+   - It opens on its own when it needs attention: a basic reading, a refused filter or an out-of-scope request.
+   - It is never fully hidden.
 2. **Three levels of certainty, always visible.**
    - **You said** (solid) — taken directly from her words. "2 bedrooms", "under AED 140k".
    - **I assumed** (dashed) — inferred, with the reasoning one tap away. "Quiet → away from nightlife and highways".
@@ -87,13 +90,13 @@ Handled lightly: out-of-scope ("buy", "mortgage") → short redirect; nonsense i
 
 **Data quality — the real risk.** Pet policy, furnishing, noise and availability are often missing or stale in listings. The design assumes gaps exist and shows them; production needs listing-completeness nudges for agents and freshness flags.
 
-**Risks.** Hallucinated facts (mitigated: model never generates listing data) · Discriminatory filtering (explicit refusal + policy list) · Over-trust in estimates (ranges, labels, "ask the agent" prompts) · Silent misreading (the read-back is mandatory, not hidden).
+**Risks.** Hallucinated facts (mitigated: model never generates listing data) · Discriminatory filtering (explicit refusal + policy list) · Over-trust in estimates (ranges, labels, "ask the agent" prompts) · Silent misreading (the read-back is always on screen; collapsed, the guesses still show).
 
 ## 7. Test plan
 
 **Week 1 — moderated, 6–8 people relocating to Dubai within 6 months (remote, their own phones).**
 Tasks: describe your next home in your words; fix something it got wrong; pick 2 homes you'd contact and say why.
-Watch for: do they read the understanding card? Do they get the difference between *said / assumed / can't check*? Do they correct by tapping or by typing? What makes them not trust a result?
+Watch for: do they notice the guesses in the collapsed reading, and do they ever open it? Do they get the difference between *said / assumed / can't check*? Do they correct by tapping or by typing? What makes them not trust a result?
 
 **Then — limited live test vs filters (A/B).**
 - Primary: share of sessions that reach a contacted listing; time to first contact.

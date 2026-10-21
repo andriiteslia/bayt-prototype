@@ -192,7 +192,7 @@ export default function App() {
         </header>
 
         {view === 'results' && u && !loading && scrolled && u.criteria.length > 0 && (
-          <button className="summary" onClick={() => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <button className="summary" onClick={() => { setUOpen(true); scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }); }}>
             <span className="summary-t">{u.criteria.filter((c) => c.weight === 'must').map((c) => c.label).join(', ') || u.criteria.map((c) => c.label).join(', ')}</span>
             <span className="summary-a">Edit</span>
           </button>
@@ -204,7 +204,7 @@ export default function App() {
           <main className="describe">
             <span className="badge">AI search for renters</span>
             <h1>Describe your next home</h1>
-            <p className="lede">Write it the way you'd tell a friend. I'll show you what I understood before searching, so you can fix anything I got wrong.</p>
+            <p className="lede">Write it the way you'd tell a friend. I'll show you what I understood next to the results, so you can fix anything I got wrong.</p>
             <form className="prompt" onSubmit={(e) => { e.preventDefault(); submit(draft); }}>
               <textarea value={draft} onChange={(e) => setDraft(e.target.value)} rows={4} autoFocus
                 placeholder="Two bedrooms near a park, quiet, no more than 25 minutes to DIFC…" aria-label="Describe your next home"
@@ -394,8 +394,8 @@ function ResultList({ res, u, saved, showAll, setShowAll, sort, setSort, onSave,
         <section className="r-sec">
           <div className="r-head">
             <div>
-              <h2>{noCriteria ? `All ${res.fits.length} homes` : `${res.fits.length} home${res.fits.length > 1 ? 's' : ''} fit${res.fits.length > 1 ? '' : 's'} your must-haves`}</h2>
-              <p className="u-sub">{noCriteria ? 'Tell me more and I\'ll narrow this down.' : `Out of ${res.checked} fictional homes`}</p>
+              <h2>{noCriteria ? `All ${res.fits.length} homes` : `${res.fits.length} home${res.fits.length > 1 ? 's' : ''} match${res.fits.length > 1 ? '' : 'es'}`}</h2>
+              <p className="u-sub">{noCriteria ? 'Tell me more and I\'ll narrow this down.' : `Fit all your must-haves, out of ${res.checked}`}</p>
             </div>
             {res.fits.length > 1 && (
               <button className="sort" onClick={() => setSort(sort === 'best' ? 'price' : 'best')} aria-label={`Sorted by ${sort === 'best' ? 'best match' : 'lowest price'}. Tap to change.`}>
@@ -481,7 +481,7 @@ function Composer({ onSend, disabled, busy }) {
     <form className="composer" onSubmit={(e) => { e.preventDefault(); if (v.trim()) { onSend(v); setV(''); } }}>
       <div className="composer-field">
       <input value={v} onChange={(e) => setV(e.target.value)} disabled={disabled || busy}
-        placeholder={disabled ? 'Answer or skip the questions first' : busy ? 'Updating your search…' : 'Change something…'} aria-label="Change your search" />
+        placeholder={disabled ? 'Answer or skip above first' : busy ? 'Updating your search…' : 'Change something…'} aria-label="Change your search" />
       <VoiceButton small />
       </div>
       <button className={`send ${busy ? 'busy' : ''}`} disabled={!v.trim() || disabled || busy} aria-label="Update search">{busy ? <span className="spin" /> : <Icon.send />}</button>

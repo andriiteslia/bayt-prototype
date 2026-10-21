@@ -99,19 +99,20 @@ function FiltersView({ u, onChip, onAdd, flashKeys }) {
 // Collapsed: one line of the reading (assumptions first) so results are visible right away.
 // The reading never disappears completely: the guesses stay on screen and tappable.
 function Collapsed({ u, onChip, onOpen, flashKeys }) {
+  const src = u.source === 'ai' ? `Read by AI${u.ms ? ` in ${(u.ms / 1000).toFixed(1)} s` : ''}` : u.source === 'example' ? 'Guided example' : 'Basic reading';
   const items = u.criteria.map((c, i) => [c, i]).sort((a, b) => (a[0].certainty === 'assumed' ? -1 : 0) - (b[0].certainty === 'assumed' ? -1 : 0));
   const assumed = u.criteria.filter((c) => c.certainty === 'assumed').length;
   const cant = u.notes.filter((n) => n.kind === 'cantcheck').length;
   const meta = [assumed && `${assumed} guess${assumed > 1 ? 'es' : ''} to check`, cant && `${cant} I can't check`].filter(Boolean).join(', ');
   return (
     <section className="understand collapsed" aria-labelledby="u-title">
-      <button className="u-toggle" onClick={onOpen} aria-expanded="false">
-        <span>
+      <div className="u-toggle">
+        <div>
           <h2 id="u-title">What I understood</h2>
-          {meta && <span className="u-meta">{meta}</span>}
-        </span>
-        <span className="u-show">Show <Icon.chevron /></span>
-      </button>
+          <p className="u-meta"><span className={`u-src ${u.source}`}>{src}</span>{meta && <span className="u-guess">{meta}</span>}</p>
+        </div>
+        <button className="u-show" onClick={onOpen} aria-expanded="false" aria-controls="u-title">Show <Icon.chevron /></button>
+      </div>
       {items.length > 0 && (
         <div className="chips compact">
           {items.map(([c, i]) => <Chip key={i} c={c} onClick={() => onChip(i)} flash={flashKeys.includes(c.field)} />)}
@@ -210,7 +211,7 @@ export function LegendSheet({ open, onClose }) {
       <h4 className="sheet-h">Where facts come from</h4>
       <p className="muted"><span className="src src-agent">Agent</span> stated in the listing. <span className="src src-estimate">Estimate</span> worked out by Bayt from location data — a range, not a promise.</p>
       <h4 className="sheet-h">About this demo</h4>
-      <p className="muted">28 fictional homes. The reading of your words is scripted, so unusual phrasing may be missed — which is why everything here is editable.</p>
+      <p className="muted">28 fictional homes and sample photos. What you type is read by a live AI; the guided examples use a fixed reading so they behave the same every time. Either can get things wrong, which is why everything here is editable.</p>
     </Sheet>
   );
 }
