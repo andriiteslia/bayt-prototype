@@ -1,0 +1,135 @@
+// Area profiles. Travel times are illustrative peak-hour estimates (weekday ~8:30am),
+// door to door. They are labelled "Bayt estimate" in the UI, never presented as fact.
+// hubs: DIFC (also used for Downtown / Business Bay offices), DIC (Internet / Media City)
+
+export const AREAS = {
+  sobha: {
+    name: 'Sobha Hartland',
+    intro: 'Green and low-key, built around lagoons and parkland. Close to the centre but feels tucked away.',
+    quiet: true, lively: false, beach: false,
+    drive: { DIFC: [12, 20], DIC: [25, 35] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#cfe3dc', '#7fb3a6'],
+  },
+  dubaihills: {
+    name: 'Dubai Hills Estate',
+    intro: 'Leafy and family-leaning, with a large central park and a mall. Mostly a driving neighbourhood.',
+    quiet: true, lively: false, beach: false,
+    drive: { DIFC: [18, 28], DIC: [15, 22] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#dde7cf', '#93ad78'],
+  },
+  businessbay: {
+    name: 'Business Bay',
+    intro: 'Towers along the canal, next to Downtown. Busy, central and walkable to offices.',
+    quiet: false, lively: true, beach: false,
+    drive: { DIFC: [6, 15], DIC: [20, 30] },
+    metro: { DIFC: 20, DIC: 40 },
+    palette: ['#d6dde8', '#7f93b3'],
+  },
+  downtown: {
+    name: 'Downtown Dubai',
+    intro: 'The very centre: Burj Khalifa, Dubai Mall, restaurants. Lively, polished and the priciest per square foot.',
+    quiet: false, lively: true, beach: false,
+    drive: { DIFC: [5, 12], DIC: [20, 30] },
+    metro: { DIFC: 15, DIC: 35 },
+    palette: ['#e4dbe6', '#a088aa'],
+  },
+  jlt: {
+    name: 'Jumeirah Lake Towers (JLT)',
+    intro: 'Towers around small lakes, with cafés at street level. Good value for the location and on the metro.',
+    quiet: false, lively: true, beach: false,
+    drive: { DIFC: [25, 40], DIC: [5, 12] },
+    metro: { DIFC: 35, DIC: 15 },
+    palette: ['#d3e2ea', '#6f9fb8'],
+  },
+  albarsha: {
+    name: 'Al Barsha',
+    intro: 'Practical and central-west: Mall of the Emirates, a big pond park, and the metro on the main road.',
+    quiet: false, lively: false, beach: false,
+    drive: { DIFC: [18, 30], DIC: [10, 18] },
+    metro: { DIFC: 30, DIC: 20 },
+    palette: ['#ece2d0', '#c2a678'],
+  },
+  jvc: {
+    name: 'Jumeirah Village Circle (JVC)',
+    intro: 'Quieter and good value, with small parks between low-rise blocks. You will want a car.',
+    quiet: true, lively: false, beach: false,
+    drive: { DIFC: [30, 45], DIC: [15, 25] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#e8dfd3', '#b99c7c'],
+  },
+  marina: {
+    name: 'Dubai Marina',
+    intro: 'Waterfront towers, close to the beach, busy evenings. Metro and tram, but far from DIFC at rush hour.',
+    quiet: false, lively: true, beach: true,
+    drive: { DIFC: [28, 42], DIC: [8, 15] },
+    metro: { DIFC: 40, DIC: 18 },
+    palette: ['#cfe0ea', '#5f8fae'],
+  },
+  mirdif: {
+    name: 'Mirdif',
+    intro: 'Established and low-rise on the east side, near Mushrif Park. Calm, with some aircraft noise.',
+    quiet: true, lively: false, beach: false,
+    drive: { DIFC: [20, 32], DIC: [35, 50] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#e6e1d4', '#a9a17c'],
+  },
+  alfurjan: {
+    name: 'Al Furjan',
+    intro: 'Newer and residential, with its own metro stop. Calm, but a long way from DIFC.',
+    quiet: true, lively: false, beach: false,
+    drive: { DIFC: [30, 45], DIC: [15, 22] },
+    metro: { DIFC: 45, DIC: 25 },
+    palette: ['#e3e4d6', '#9da27f'],
+  },
+  citywalk: {
+    name: 'City Walk',
+    intro: 'A walkable, upscale outdoor district between Jumeirah and Downtown. Lots of cafés.',
+    quiet: false, lively: true, beach: false,
+    drive: { DIFC: [8, 15], DIC: [18, 28] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#eadbd6', '#b9877a'],
+  },
+  umm_suqeim: {
+    name: 'Umm Suqeim',
+    intro: 'Villas a few streets from the beach. Quiet, sunny and expensive.',
+    quiet: true, lively: false, beach: true,
+    drive: { DIFC: [15, 25], DIC: [12, 20] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#dfe9e6', '#86b6ad'],
+  },
+  townsquare: {
+    name: 'Town Square',
+    intro: 'Budget-friendly new community far out on the Al Qudra side. Calm, green, car-dependent.',
+    quiet: true, lively: false, beach: false,
+    drive: { DIFC: [35, 50], DIC: [25, 35] },
+    metro: { DIFC: null, DIC: null },
+    palette: ['#e2e7d8', '#9fb089'],
+  },
+};
+
+// Words people use for each area → area key
+export const AREA_ALIASES = [
+  ['sobha', /\b(sobha|hartland|mbr city|meydan)\b/],
+  ['dubaihills', /\b(dubai hills|hills estate)\b/],
+  ['businessbay', /\bbusiness bay\b/],
+  ['downtown', /\b(downtown|burj khalifa)\b/],
+  ['jlt', /\b(jlt|jumeirah lakes? towers)\b/],
+  ['albarsha', /\b(al barsha|barsha)\b/],
+  ['jvc', /\b(jvc|jumeirah village( circle)?)\b/],
+  ['marina', /\b(dubai marina|marina|jbr)\b/],
+  ['mirdif', /\bmirdif\b/],
+  ['alfurjan', /\b(al furjan|furjan)\b/],
+  ['citywalk', /\b(city walk|al wasl)\b/],
+  ['umm_suqeim', /\b(umm suqeim|jumeirah(?! ?(lakes?|village)))\b/],
+  ['townsquare', /\btown square\b/],
+];
+
+// Workplaces → travel hub
+export const WORKPLACES = [
+  { hub: 'DIFC', label: 'DIFC', re: /\b(difc|financial (centre|center)|gate village)\b/ },
+  { hub: 'DIFC', label: 'Business Bay', re: /\b(work|office|job)\b[^.]{0,30}\bbusiness bay\b/ },
+  { hub: 'DIFC', label: 'Downtown', re: /\b(work|office|job)\b[^.]{0,30}\bdowntown\b/ },
+  { hub: 'DIC', label: 'Internet City', re: /\b(internet city|media city|dic|dmc|knowledge park)\b/ },
+];
