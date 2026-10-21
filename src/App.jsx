@@ -227,7 +227,7 @@ export default function App() {
                 );
               })}
             </div>
-            <p className="foot">A prototype with 28 fictional rentals. No real listings, agents or prices.</p>
+            <p className="foot">A prototype with 30 fictional rentals. No real listings, agents or prices.</p>
           </main>
         )}
 

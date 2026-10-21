@@ -211,7 +211,7 @@ export function LegendSheet({ open, onClose }) {
       <h4 className="sheet-h">Where facts come from</h4>
       <p className="muted"><span className="src src-agent">Agent</span> stated in the listing. <span className="src src-estimate">Estimate</span> worked out by Bayt from location data — a range, not a promise.</p>
       <h4 className="sheet-h">About this demo</h4>
-      <p className="muted">28 fictional homes and sample photos. What you type is read by a live AI; the guided examples use a fixed reading so they behave the same every time. Either can get things wrong, which is why everything here is editable.</p>
+      <p className="muted">30 fictional homes and sample photos. What you type is read by a live AI; the guided examples use a fixed reading so they behave the same every time. Either can get things wrong, which is why everything here is editable.</p>
     </Sheet>
   );
 }

@@ -6,9 +6,9 @@ const HERO = [2, 6, 7, 8, 12, 13, 15, 16, 21, 23, 24, 26, 27];
 const EXTRA = [1, 3, 5, 10];
 const src = (n) => `${import.meta.env.BASE_URL}photos/p${n}.webp`;
 
-// Which hero photo each listing gets. Chosen offline by running 360 typical searches and
+// Which hero photo each listing gets. Chosen offline by running 420 typical searches and
 // colouring listings so that homes shown together almost never share a photo.
-const SLOT = {"sh1":1,"sh2":12,"dh1":7,"dh2":4,"dh3":5,"bb1":10,"bb2":8,"dt1":2,"dt2":6,"dt3":0,"jl1":3,"jl2":11,"jl3":12,"ab1":5,"ab2":3,"jv1":2,"jv2":3,"jv3":8,"dm1":1,"dm2":4,"mi1":7,"mi2":5,"af1":9,"cw1":9,"us1":11,"ts1":10,"ts2":0,"jl4":6};
+const SLOT = {"sh1":9,"sh2":0,"sh3":12,"dh1":6,"dh2":9,"dh3":5,"bb1":1,"bb2":7,"dt1":3,"dt2":7,"dt3":2,"jl1":11,"jl2":6,"jl3":0,"ab1":5,"ab2":5,"jv1":3,"jv2":11,"jv3":6,"dm1":12,"dm2":9,"mi1":8,"mi2":8,"af1":10,"cw1":10,"us1":4,"us2":7,"ts1":1,"ts2":2,"jl4":4};
 
 export function photosFor(listing) {
   const k = SLOT[listing.id] ?? 0;
