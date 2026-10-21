@@ -176,8 +176,8 @@ export default function App() {
         <header className="top">
           {view === 'results'
             ? <button className="icon-btn" onClick={() => { setView('describe'); setDraft(query); }} aria-label="Back"><Icon.back /></button>
-            : <span className="logo"><span className="logo-mark" aria-hidden />bayt</span>}
-          <span className="top-title">{view === 'results' ? 'Your search' : view === 'saved' ? 'Saved' : ''}</span>
+            : view === 'describe' && <span className="logo"><span className="logo-mark" aria-hidden />bayt</span>}
+          <span className={`top-title ${view === 'saved' ? 'lg' : ''}`}>{view === 'results' ? 'Your search' : view === 'saved' ? 'Saved homes' : ''}</span>
           {view !== 'results' && (
             <button className="notes-btn" onClick={() => setSheet({ type: 'notes' })}>Design notes</button>
           )}
@@ -270,11 +270,13 @@ export default function App() {
         )}
 
         {view === 'saved' && (
-          <main className="saved">
+          <main className={`saved ${saved.length === 0 ? 'is-empty' : ''}`}>
             {saved.length === 0 ? (
-              <section className="empty">
+              <section className="saved-empty">
+                <span className="saved-empty-ic"><Icon.heart width="26" height="26" /></span>
                 <h2>Nothing saved yet</h2>
                 <p>Tap the heart on a home to keep it here while you decide.</p>
+                <button className="btn secondary" onClick={() => setView(u ? 'results' : 'describe')}>{u ? 'Back to your search' : 'Start a search'}</button>
               </section>
             ) : saved.map((id) => {
               const s = scoreListing(u?.criteria || [], LISTINGS.find((l) => l.id === id));

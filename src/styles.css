@@ -51,7 +51,7 @@ p { margin: 0; }
 .phone { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); }
 .island { display: none; }
 .app {
-  position: relative; width: 100%; height: 100%;
+  position: relative; width: 100%; height: 100%; display: flex; flex-direction: column;
   background: var(--bg); overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
 }
@@ -464,3 +464,14 @@ button.fv-row:not(:disabled):hover { background: var(--slate-soft); }
 .voice.small { position: absolute; right: 6px; top: 50%; width: 36px; height: 36px; margin-top: -18px; border: 0; border-radius: 10px; background: transparent; box-shadow: none; color: var(--ink-3); }
 .composer-field { position: relative; flex: 1; display: flex; }
 .composer-field input { padding-right: 46px; }
+
+/* Content grows so the tab bar and composer sit at the bottom even on short screens */
+.app > main { flex: 1 0 auto; }
+.app > .top, .app > .summary, .app > .tabbar, .app > .composer { flex: none; }
+.saved.is-empty { display: flex; align-items: center; justify-content: center; padding-bottom: 120px; }
+.saved-empty { display: grid; justify-items: center; gap: 8px; max-width: 280px; text-align: center; }
+.saved-empty-ic { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 6px; border-radius: 16px; background: var(--brand-soft); color: var(--brand); }
+.saved-empty h2 { font-size: 18px; font-weight: 700; }
+.saved-empty p { color: var(--ink-2); font-size: 14.5px; }
+.saved-empty .btn { margin-top: 10px; height: 42px; font-size: 14px; }
+.top-title.lg { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
