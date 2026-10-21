@@ -96,7 +96,33 @@ function FiltersView({ u, onChip, onAdd, flashKeys }) {
   );
 }
 
-export function UnderstandingCard({ u, query, onEditText, onChip, onLegend, onAdd, mode, setMode, flashKeys = [] }) {
+// Collapsed: one line of the reading (assumptions first) so results are visible right away.
+// The reading never disappears completely: the guesses stay on screen and tappable.
+function Collapsed({ u, onChip, onOpen, flashKeys }) {
+  const items = u.criteria.map((c, i) => [c, i]).sort((a, b) => (a[0].certainty === 'assumed' ? -1 : 0) - (b[0].certainty === 'assumed' ? -1 : 0));
+  const assumed = u.criteria.filter((c) => c.certainty === 'assumed').length;
+  const cant = u.notes.filter((n) => n.kind === 'cantcheck').length;
+  const meta = [assumed && `${assumed} guess${assumed > 1 ? 'es' : ''} to check`, cant && `${cant} I can't check`].filter(Boolean).join(', ');
+  return (
+    <section className="understand collapsed" aria-labelledby="u-title">
+      <button className="u-toggle" onClick={onOpen} aria-expanded="false">
+        <span>
+          <h2 id="u-title">What I understood</h2>
+          {meta && <span className="u-meta">{meta}</span>}
+        </span>
+        <span className="u-show">Show <Icon.chevron /></span>
+      </button>
+      {items.length > 0 && (
+        <div className="chips compact">
+          {items.map(([c, i]) => <Chip key={i} c={c} onClick={() => onChip(i)} flash={flashKeys.includes(c.field)} />)}
+        </div>
+      )}
+    </section>
+  );
+}
+
+export function UnderstandingCard({ u, query, onEditText, onChip, onLegend, onAdd, mode, setMode, open, setOpen, flashKeys = [] }) {
+  if (!open) return <Collapsed u={u} onChip={onChip} onOpen={() => setOpen(true)} flashKeys={flashKeys} />;
   const must = u.criteria.map((c, i) => [c, i]).filter(([c]) => c.weight === 'must');
   const nice = u.criteria.map((c, i) => [c, i]).filter(([c]) => c.weight === 'nice');
   const cant = u.notes.filter((n) => n.kind === 'cantcheck');
@@ -163,7 +189,10 @@ export function UnderstandingCard({ u, query, onEditText, onChip, onLegend, onAd
         </div>
       )}
       </>}
-      <button className="link small u-legend" onClick={onLegend}><Icon.info /> How to read this</button>
+      <div className="u-foot">
+        <button className="link small" onClick={onLegend}><Icon.info /> How to read this</button>
+        <button className="link small" onClick={() => setOpen(false)} aria-expanded="true">Hide <Icon.chevron style={{ transform: 'rotate(180deg)' }} /></button>
+      </div>
     </section>
   );
 }

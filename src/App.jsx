@@ -37,6 +37,7 @@ export default function App() {
   const [showAll, setShowAll] = useState(false);
   const [sort, setSort] = useState('best');
   const [uMode, setUMode] = useState('words');
+  const [uOpen, setUOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const scrollRef = useRef(null);
 
@@ -74,6 +75,8 @@ export default function App() {
       }
     }
     if (id !== reqId.current) return; // a newer search started
+    // Start collapsed so results show first, unless the reading needs attention
+    setUOpen(nu.source === 'basic' || nu.notes.some((n) => ['declined', 'outofscope', 'empty'].includes(n.kind)));
     setU(nu); setQs(questionsFor(nu)); setLoading(false);
   }
 
@@ -236,7 +239,7 @@ export default function App() {
                   onEditText={() => { setDraft(query); setView('describe'); }}
                   onChip={(i) => setSheet({ type: 'edit', i, k: Date.now() })}
                   onLegend={() => setSheet({ type: 'legend' })}
-                  mode={uMode} setMode={setUMode} onAdd={addCriterion} />
+                  mode={uMode} setMode={setUMode} onAdd={addCriterion} open={uOpen} setOpen={setUOpen} />
 
                 {isEmpty ? (
                   <section className="empty">

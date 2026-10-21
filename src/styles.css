@@ -383,7 +383,6 @@ p { margin: 0; }
 .mini-seg { display: inline-flex; padding: 2px; border-radius: 9px; background: var(--slate-soft); }
 .mini-seg button { height: 28px; padding: 0 10px; border: 0; border-radius: 7px; background: transparent; font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
 .mini-seg button.on { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(15,23,42,.12); }
-.u-legend { margin-top: 14px; }
 .fv { margin-top: 10px; }
 .fv-sum { font-size: 13.5px; color: var(--ink-2); padding: 10px 12px; border-radius: var(--r-m); background: var(--brand-soft); }
 .fv-sum strong { color: var(--brand-ink); }
@@ -493,3 +492,15 @@ button.fv-row:not(:disabled):hover { background: var(--slate-soft); }
   .sheet-foot { padding-bottom: 36px; }
   .toast { bottom: 116px; }
 }
+
+/* Collapsible reading */
+.understand.collapsed { padding: 12px 14px 14px; }
+.u-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0; border: 0; background: none; text-align: left; }
+.u-toggle h2 { font-size: 16px; font-weight: 700; }
+.u-meta { display: block; margin-top: 1px; font-size: 12.5px; color: #92400E; }
+.u-show { flex: none; display: inline-flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 600; color: var(--brand-ink); }
+.chips.compact { flex-wrap: nowrap; overflow-x: auto; margin: 10px -14px 0; padding: 0 14px 2px; scrollbar-width: none; }
+.chips.compact::-webkit-scrollbar { display: none; }
+.chips.compact .chip { flex: none; min-height: 30px; padding: 4px 10px; font-size: 13px; white-space: nowrap; }
+.chips.compact .chip-q { width: 14px; height: 14px; font-size: 9.5px; }
+.u-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
