@@ -126,7 +126,6 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: 1500,
-        temperature: 0,
         system: SYSTEM,
         tools: [{ name: 'record_understanding', description: "Record the renter's search criteria and notes.", input_schema: SCHEMA }],
         tool_choice: { type: 'tool', name: 'record_understanding' },
