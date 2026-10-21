@@ -172,7 +172,7 @@ export default function App() {
   return (
     <div className="shell">
       <Device>
-      <div className="app" ref={scrollRef} onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 380)}>
+      <div className="app">
         <header className="top">
           {view === 'results'
             ? <button className="icon-btn" onClick={() => { setView('describe'); setDraft(query); }} aria-label="Back"><Icon.back /></button>
@@ -195,6 +195,8 @@ export default function App() {
           </button>
         )}
 
+        {/* Only this part scrolls: the nav bar above and the tab bar / composer below stay put */}
+        <div className="scroll" ref={scrollRef} onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 380)}>
         {view === 'describe' && (
           <main className="describe">
             <span className="badge">AI search for renters</span>
@@ -293,6 +295,7 @@ export default function App() {
             })}
           </main>
         )}
+        </div>
 
         {view !== 'results' && (
           <nav className="tabbar" aria-label="Main">

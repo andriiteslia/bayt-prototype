@@ -84,6 +84,7 @@ export function Detail({ s, criteria, saved, onSave, onBack, onMessage, newcomer
   ];
   return (
     <div className="detail">
+      <div className="detail-scroll">
       <div className="detail-top">
         <Gallery listing={l} height={280} />
         <button className="icon-btn float left" onClick={onBack} aria-label="Back to results"><Icon.back /></button>
@@ -124,6 +125,7 @@ export function Detail({ s, criteria, saved, onSave, onBack, onMessage, newcomer
           <p>{s.area.intro}</p>
           {newcomer && <p className="muted small">A short description by Bayt, not a full guide. Worth a video call with the agent to see the street.</p>}
         </section>
+      </div>
       </div>
       <div className="detail-cta">
         <button className="btn secondary" onClick={onSave}>{saved ? 'Saved' : 'Save'}</button>
