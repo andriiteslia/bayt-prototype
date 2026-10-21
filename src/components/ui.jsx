@@ -13,6 +13,7 @@ export const Icon = {
   info: (p) => <svg viewBox="0 0 24 24" width="16" height="16" {...P} {...p}><circle cx="12" cy="12" r="9" /><path d="M12 11v5" /><circle cx="12" cy="8" r=".6" fill="currentColor" /></svg>,
   pencil: (p) => <svg viewBox="0 0 24 24" width="15" height="15" {...P} {...p}><path d="M4 20h4L19 9l-4-4L4 16z" /></svg>,
   shield: (p) => <svg viewBox="0 0 24 24" width="14" height="14" {...P} {...p}><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" /><path d="M9 12l2 2 4-4" /></svg>,
+  mic: (p) => <svg viewBox="0 0 24 24" width="20" height="20" {...P} {...p}><rect x="9" y="3.5" width="6" height="11" rx="3" /><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5" /></svg>,
   search: (p) => <svg viewBox="0 0 24 24" width="22" height="22" {...P} {...p}><circle cx="11" cy="11" r="6.5" /><path d="M16 16l4 4" /></svg>,
   plane: (p) => <svg viewBox="0 0 24 24" width="18" height="18" {...P} {...p}><path d="M3 13l18-7-6 15-3-6z" /><path d="M12 15l3-3" /></svg>,
   clock: (p) => <svg viewBox="0 0 24 24" width="18" height="18" {...P} {...p}><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg>,

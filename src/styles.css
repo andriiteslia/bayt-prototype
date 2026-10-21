@@ -47,7 +47,9 @@ p { margin: 0; }
 
 /* Phone-width shell. Overlays live inside .phone so they stay in the device on desktop. */
 .shell { height: 100%; display: flex; justify-content: center; }
-.phone { position: relative; width: 100%; max-width: 430px; height: 100%; overflow: hidden; background: var(--bg); }
+.device-shadow, .device { width: 100%; max-width: 430px; height: 100%; }
+.phone { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); }
+.island { display: none; }
 .app {
   position: relative; width: 100%; height: 100%;
   background: var(--bg); overflow-y: auto; overflow-x: hidden;
@@ -56,7 +58,21 @@ p { margin: 0; }
 .notes-side { display: none; }
 @media (min-width: 600px) {
   .shell { align-items: center; gap: 40px; padding: 24px; }
-  .phone { flex: none; height: min(880px, calc(100vh - 48px)); border-radius: 32px; box-shadow: 0 0 0 1px rgba(15,23,42,.06), 0 30px 70px -24px rgba(15,23,42,.35); }
+  /* Black bezel with 60%-smoothed corners (clip paths set in Device.jsx) */
+  .device-shadow { flex: none; width: 412px; max-width: none; height: min(880px, calc(100vh - 48px)); filter: drop-shadow(0 30px 40px rgba(15,23,42,.28)) drop-shadow(0 2px 4px rgba(15,23,42,.2)); }
+  .device { max-width: none; padding: 11px; background: #000; border-radius: 62px; box-shadow: inset 0 0 0 1.5px #3a3d44, inset 0 0 0 3px #000; }
+  .phone { border-radius: 51px; }
+  .island { display: block; position: absolute; z-index: 90; top: 11px; left: 50%; width: 112px; height: 32px; margin-left: -56px; border-radius: 16px; background: #000; pointer-events: none; }
+  .app .top { padding-top: 44px; height: 100px; }
+  .app .summary { top: 100px; }
+  .notes-sheet-top { padding-top: 44px; height: 100px; }
+  .detail .float { top: 52px; }
+  .phone::after { content: ''; position: absolute; z-index: 95; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: #0F172A; pointer-events: none; }
+  .composer { padding: 12px 18px 30px; }
+  .tabbar { padding-bottom: 22px; margin-top: -88px; }
+  .detail-cta { padding: 12px 18px 30px; }
+  .sheet-foot { padding-bottom: 30px; }
+  .toast { bottom: 100px; }
 }
 @media (min-width: 1100px) {
   .shell { justify-content: center; }
@@ -442,3 +458,9 @@ button.fv-row:not(:disabled):hover { background: var(--slate-soft); }
 .spin { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; animation: rot .7s linear infinite; }
 .send.busy:disabled { background: var(--brand); }
 @keyframes rot { to { transform: rotate(360deg); } }
+
+/* Voice input (visual only) */
+.voice { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); cursor: default; box-shadow: var(--shadow-1); }
+.voice.small { position: absolute; right: 6px; top: 50%; width: 36px; height: 36px; margin-top: -18px; border: 0; border-radius: 10px; background: transparent; box-shadow: none; color: var(--ink-3); }
+.composer-field { position: relative; flex: 1; display: flex; }
+.composer-field input { padding-right: 46px; }

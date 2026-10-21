@@ -9,6 +9,7 @@ import { ListingCard, Detail, MessageSheet, NotForMeSheet } from './components/L
 import HomeArt from './components/HomeArt.jsx';
 import { NotesPanel } from './components/Notes.jsx';
 import { readWithAI } from './lib/ai.js';
+import Device from './components/Device.jsx';
 
 const EXAMPLES = [
   { icon: 'plane', title: 'New to Dubai', text: "I'm moving from London in March for a job in DIFC and don't know the city at all. We have a dog." },
@@ -170,7 +171,7 @@ export default function App() {
 
   return (
     <div className="shell">
-      <div className="phone">
+      <Device>
       <div className="app" ref={scrollRef} onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 380)}>
         <header className="top">
           {view === 'results'
@@ -205,6 +206,7 @@ export default function App() {
                 onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(draft); }} />
               <div className="prompt-bar">
                 <span>Budget, area feel, commute, pets — anything</span>
+                <VoiceButton />
                 <button className="btn primary" disabled={!draft.trim()}>Find homes</button>
               </div>
             </form>
@@ -337,7 +339,7 @@ export default function App() {
             {toast.undo && <button onClick={() => { toast.undo(); setToast(null); }}>Undo</button>}
           </div>
         )}
-      </div>
+      </Device>
       <aside className="notes-side" aria-label="Design notes">
         <NotesPanel onTry={tryScenario} />
       </aside>
@@ -454,12 +456,26 @@ function ZeroState({ u, hidden, res, onRelax, onOpen }) {
   );
 }
 
+// Voice input is shown to signal intent; it isn't wired up in the prototype
+function VoiceButton({ small }) {
+  return (
+    <button type="button" className={`voice ${small ? 'small' : ''}`} aria-disabled="true" tabIndex={-1}
+      title="Voice input — not in this prototype" aria-label="Voice input, not available in this prototype"
+      onClick={(e) => e.preventDefault()}>
+      <Icon.mic />
+    </button>
+  );
+}
+
 function Composer({ onSend, disabled, busy }) {
   const [v, setV] = useState('');
   return (
     <form className="composer" onSubmit={(e) => { e.preventDefault(); if (v.trim()) { onSend(v); setV(''); } }}>
+      <div className="composer-field">
       <input value={v} onChange={(e) => setV(e.target.value)} disabled={disabled || busy}
         placeholder={disabled ? 'Answer or skip the questions first' : busy ? 'Updating your search…' : 'Change something…'} aria-label="Change your search" />
+      <VoiceButton small />
+      </div>
       <button className={`send ${busy ? 'busy' : ''}`} disabled={!v.trim() || disabled || busy} aria-label="Update search">{busy ? <span className="spin" /> : <Icon.send />}</button>
     </form>
   );
