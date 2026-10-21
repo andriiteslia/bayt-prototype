@@ -55,6 +55,8 @@ NOTES:
 
 newcomer: true if they are moving to Dubai / new to the city / don't know the areas.
 
+Where the renter works is a commute, not an area to live in: never put the workplace into "areas" unless they say they want to live there.
+A budget with an explicit period ("10k a month", "150k a year") is "said", even after you convert it.
 Only add a note when the renter actually raised that topic. Never add a "declined" note unless they asked to filter by who lives nearby, and never add a "cantcheck" note about safety, neighbours or anything else they didn't mention.
 Do not invent criteria the renter didn't express. Fewer, correct items beat many guesses. Write notes and details in plain, friendly English, max 30 words each.`;
 
